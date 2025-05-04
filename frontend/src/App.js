@@ -4,10 +4,9 @@ function App() {
   const [quote, setQuote] = useState('Loading...');
 
   useEffect(() => {
-    fetch('https://your-backend-url.onrender.com/api/quote')  // replace with your actual deployed Flask backend URL
-      .then((response) => response.json())
-      .then((data) => setQuote(data.quote))
-      .catch((error) => setQuote('Failed to load quote.'));
+    fetch('https://localhost:5000/api/quote')
+      .then(response => response.json())
+      .then(data => setQuote(data.quote));
   }, []);
 
   return (
