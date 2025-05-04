@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
 function App() {
+  const [quote, setQuote] = useState('Loading...');
+
+  useEffect(() => {
+    fetch('https://your-backend-url.onrender.com/api/quote')  // replace with your actual deployed Flask backend URL
+      .then((response) => response.json())
+      .then((data) => setQuote(data.quote))
+      .catch((error) => setQuote('Failed to load quote.'));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ textAlign: 'center', marginTop: '5rem' }}>
+      <h1>Quote of the Day</h1>
+      <p style={{ fontSize: '1.5rem' }}>{quote}</p>
     </div>
   );
 }
